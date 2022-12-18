@@ -8,7 +8,7 @@ def printBoard(board):
     print(board[4] + ' |' +board[5] + ' |' +board[6] )
     print('--+--+--')
     print(board[7] + ' |' +board[8] + ' |' +board[9] )
-    
+    print("................................")
 
 
 def checkDraw():
@@ -68,7 +68,6 @@ def insert(letter,position):
     if posFree(position):
         board[position]=letter
         printBoard(board)
-        print("Inserted")
         if(checkDraw()):
             print("Draw!")
             exit()
@@ -177,11 +176,31 @@ def minimax(board,isMaximizing):
 #                     bestScore = score
 #         return bestScore
 
+def playerFirst():   
+    while not checkForWin():
+        playerMove()
+        botMove()        
+def botFirst():
+    while not checkForWin():
+        botMove()
+        playerMove()    
 
-        
-while not checkForWin():
-    botMove()
-    playerMove()
+
+demoBoard ={1:'1',2:'2',3:'3',
+        4:'4',5:'5',6:'6',
+        7:'7',8:'8',9:'9',}
+
+print("Welcome To Tic Tac Toe")
+print( "This is the following configuration for the game")
+printBoard(demoBoard)
+# print("Do you want to play first?(Type Y/N)")
+# c= input()
+# if(c=="Y" or c=="y"):     
+#     playerFirst()
+# else:
+botFirst()
+    
+    
 
    
     
