@@ -1,3 +1,4 @@
+import random
 board ={1:' ',2:' ',3:' ',
         4:' ',5:' ',6:' ',
         7:' ',8:' ',9:' ',}
@@ -181,7 +182,9 @@ c= input()
 if(c=="Y" or c=="y"):     
     playerFirst()
 else:
-    botFirst()
+    # botFirst()
+    insert(bot,random.randint(1,9))
+    playerFirst()
     
     
 
