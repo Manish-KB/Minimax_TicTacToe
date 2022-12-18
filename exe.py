@@ -1,5 +1,3 @@
-
-
 board ={1:' ',2:' ',3:' ',
         4:' ',5:' ',6:' ',
         7:' ',8:' ',9:' ',}
@@ -67,39 +65,39 @@ def posFree(position):
         return False
     
 def insert(letter,position):
-    if posFree(position):
-        board[position]=letter
-        printBoard(board)
-        if(checkDraw()):
-            print("Draw!")
-            # exit()
-            print("Game Ended")
-            c=input("Press any key to exit")
-            exit()
-        if(checkForWin()):
-            if(letter=='X'):
-                print("Bot Wins!!")
-                # exit()
+    if(position in range(1,10)):
+        if posFree(position):
+            board[position]=letter
+            printBoard(board)
+            if(checkDraw()):
+                print("Draw!")
                 print("Game Ended")
                 c=input("Press any key to exit")
                 exit()
+            if(checkForWin()):
+                if(letter=='X'):
+                    print("Bot Wins!!")
+                    print("Game Ended")
+                    c=input("Press any key to exit")
+                    exit()
+                else:
+                    print("Player Wins!")    
+                    print("Game Ended")
+                    c=input("Press any key to exit")
+                    exit()
+            return
                 
-                
-            else:
-                print("Player Wins!")    
-                # exit()
-                print("Game Ended")
-                c=input("Press any key to exit")
-                exit()
-               
-        return
-            
-                
+                    
+        else:
+            print("Position is not free choose some other position")    
+            position=int(input())
+            insert(letter,position)
+            return
     else:
-        print("Position is not free choose some other position")    
+        print("Position is invalid..Enter the position again: ")    
         position=int(input())
         insert(letter,position)
-        return
+        return    
 
 player='O'
 bot='X'
@@ -168,29 +166,22 @@ def playerFirst():
 def botFirst():
     while not checkForWin():
         botMove()
-        if not checkForWin():
-            playerMove()    
+        playerMove()    
 
 
 demoBoard ={1:'1',2:'2',3:'3',
         4:'4',5:'5',6:'6',
         7:'7',8:'8',9:'9',}
 
-print("Welcome to the Unbeatable Tic Tac Toe game")
-print("")
+print("Welcome To Tic Tac Toe")
 print( "This is the configuration for the game...")
 printBoard(demoBoard)
-print("")
 print("Do you want to play first?(Type y/n)")
 c= input()
-print("")
 if(c=="Y" or c=="y"):     
     playerFirst()
 else:
     botFirst()
-
-
-
     
     
 

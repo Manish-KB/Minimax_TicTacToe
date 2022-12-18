@@ -65,27 +65,33 @@ def posFree(position):
         return False
     
 def insert(letter,position):
-    if posFree(position):
-        board[position]=letter
-        printBoard(board)
-        if(checkDraw()):
-            print("Draw!")
-            exit()
-        if(checkForWin()):
-            if(letter=='X'):
-                print("Bot Wins!!")
+    if(position in range(1,10)):
+        if posFree(position):
+            board[position]=letter
+            printBoard(board)
+            if(checkDraw()):
+                print("Draw!")
                 exit()
-            else:
-                print("Player Wins!")    
-                exit()
-        return
-            
+            if(checkForWin()):
+                if(letter=='X'):
+                    print("Bot Wins!!")
+                    exit()
+                else:
+                    print("Player Wins!")    
+                    exit()
+            return
                 
+                    
+        else:
+            print("Position is not free choose some other position")    
+            position=int(input())
+            insert(letter,position)
+            return
     else:
-        print("Position is not free choose some other position")    
+        print("Position is invalid..Enter the position again: ")    
         position=int(input())
         insert(letter,position)
-        return
+        return    
 
 player='O'
 bot='X'
@@ -162,7 +168,7 @@ demoBoard ={1:'1',2:'2',3:'3',
         7:'7',8:'8',9:'9',}
 
 print("Welcome To Tic Tac Toe")
-print( "This is the configuration for the game....")
+print( "This is the configuration for the game...")
 printBoard(demoBoard)
 print("Do you want to play first?(Type y/n)")
 c= input()
