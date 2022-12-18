@@ -9,7 +9,7 @@ def printBoard(board):
     print('--+--+--')
     print(board[7] + ' |' +board[8] + ' |' +board[9] )
     
-printBoard(board)    
+
 
 def checkDraw():
     for key in board.keys():
@@ -19,27 +19,44 @@ def checkDraw():
     
     
 def checkForWin():
-    if(board[1]==board[2] and board[2]==board[3] and board[1] !=' '):
-        return True     
-    if(board[4]==board[5] and board[5]==board[6] and board[4] !=' '):
-        return True 
-    if(board[7]==board[8] and board[8]==board[9] and board[7] !=' '):
-        return True  
-    
-    if(board[1]==board[5] and board[5]==board[9] and board[1] !=' '):
-        return True  
-    if(board[3]==board[5] and board[5]==board[7] and board[3] !=' '):
-        return True 
-    
-    if(board[1]==board[4] and board[4]==board[7] and board[1] !=' '):
-        return True 
-    if(board[2]==board[5] and board[5]==board[8] and board[2] !=' '):
-        return True 
-    if(board[3]==board[6] and board[6]==board[9] and board[3] !=' '):
-        return True 
+    if (board[1] == board[2] and board[1] == board[3] and board[1] != ' '):
+        return True
+    elif (board[4] == board[5] and board[4] == board[6] and board[4] != ' '):
+        return True
+    elif (board[7] == board[8] and board[7] == board[9] and board[7] != ' '):
+        return True
+    elif (board[1] == board[4] and board[1] == board[7] and board[1] != ' '):
+        return True
+    elif (board[2] == board[5] and board[2] == board[8] and board[2] != ' '):
+        return True
+    elif (board[3] == board[6] and board[3] == board[9] and board[3] != ' '):
+        return True
+    elif (board[1] == board[5] and board[1] == board[9] and board[1] != ' '):
+        return True
+    elif (board[7] == board[5] and board[7] == board[3] and board[7] != ' '):
+        return True
     else:
         return False
-
+    
+def checkWhichLetterWon(letter):
+    if board[1] == board[2] and board[1] == board[3] and board[1] == letter:
+        return True
+    elif (board[4] == board[5] and board[4] == board[6] and board[4] == letter):
+        return True
+    elif (board[7] == board[8] and board[7] == board[9] and board[7] == letter):
+        return True
+    elif (board[1] == board[4] and board[1] == board[7] and board[1] == letter):
+        return True
+    elif (board[2] == board[5] and board[2] == board[8] and board[2] == letter):
+        return True
+    elif (board[3] == board[6] and board[3] == board[9] and board[3] == letter):
+        return True
+    elif (board[1] == board[5] and board[1] == board[9] and board[1] == letter):
+        return True
+    elif (board[7] == board[5] and board[7] == board[3] and board[7] == letter):
+        return True
+    else:
+        return False
 
 def posFree(position):
     if(board[position]==' '):
@@ -56,19 +73,20 @@ def insert(letter,position):
             print("Draw!")
             exit()
         if(checkForWin()):
-            if(letter=='X'or letter=='x'):
+            if(letter=='X'):
                 print("Bot Wins!!")
                 exit()
             else:
                 print("Player Wins!")    
-      
-       
+                exit()
+        return
             
                 
     else:
         print("Position is not free choose some other position")    
         position=int(input())
         insert(letter,position)
+        return
 
 player='O'
 bot='X'
@@ -79,13 +97,55 @@ def playerMove():
     return
 
 def botMove():
-    position=int(input("Enter position for X: "))
-    insert(bot,position)
+    bestScore= -1000
+    bestMove=0
+    
+    for key in board.keys():
+        if(board[key]==' '):
+            board[key]=bot
+            score= minimax(board,False)
+            
+            board[key]=' '
+            if(score> bestScore):
+                bestScore= score
+                bestMove=key 
+    insert(bot,bestMove)
     return
-
-
+    
+def minimax(board,isMaximising):
+    if checkWhichLetterWon(bot):
+        return 100
+    elif checkWhichLetterWon(player):
+        return -100
+    elif checkDraw():
+        return 0
+    
+    if isMaximising:
+        print("In Maximising")
+        bestScore= -1000
+        for key in board.keys():
+            if(board[key]==' '):
+                board[key]=bot
+                score= minimax(board,False)
+                board[key]=' '
+                if(score> bestScore):
+                    bestScore= score          
+        return bestScore
+    else:
+        print("In Minimising")
+        bestScore= 1000
+        for key in board.keys():
+            if(board[key]==' '):
+                board[key]=bot
+                score= minimax(board,True)
+                board[key]=' '
+                if(score< bestScore):
+                    bestScore= score
+        return bestScore
+        
 while not checkForWin():
+    botMove()
     playerMove()
-    if not checkForWin():
-        botMove()
+    # if not checkForWin():
+   
     
