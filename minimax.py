@@ -164,13 +164,12 @@ demoBoard ={1:'1',2:'2',3:'3',
 print("Welcome To Tic Tac Toe")
 print( "This is the following configuration for the game...")
 printBoard(demoBoard)
-print("Bot Plays First :)")
-# print("Do you want to play first?(Type Y/N)")
-# c= input()
-# if(c=="Y" or c=="y"):     
-#     playerFirst()
-# else:
-botFirst()
+print("Do you want to play first?(Type y/n)")
+c= input()
+if(c=="Y" or c=="y"):     
+    playerFirst()
+else:
+    botFirst()
     
     
 
