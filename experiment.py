@@ -162,7 +162,7 @@ demoBoard ={1:'1',2:'2',3:'3',
         7:'7',8:'8',9:'9',}
 
 print("Welcome To Tic Tac Toe")
-print( "This is the following configuration for the game...")
+print( "This is the configuration for the game...")
 printBoard(demoBoard)
 print("Do you want to play first?(Type y/n)")
 c= input()

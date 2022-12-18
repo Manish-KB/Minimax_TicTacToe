@@ -176,11 +176,14 @@ demoBoard ={1:'1',2:'2',3:'3',
         4:'4',5:'5',6:'6',
         7:'7',8:'8',9:'9',}
 
-print("Welcome To Tic Tac Toe")
-print( "This is the following configuration for the game...")
+print("Welcome to the Unbeatable Tic Tac Toe game")
+print("")
+print( "This is the configuration for the game...")
 printBoard(demoBoard)
+print("")
 print("Do you want to play first?(Type y/n)")
 c= input()
+print("")
 if(c=="Y" or c=="y"):     
     playerFirst()
 else:
