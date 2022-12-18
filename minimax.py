@@ -103,7 +103,7 @@ def botMove():
     for key in board.keys():
         if(board[key]==' '):
             board[key]=bot
-            score= minimax(board,False)
+            score= minimax(board,0,False)
             
             board[key]=' '
             if(score> bestScore):
@@ -112,7 +112,7 @@ def botMove():
     insert(bot,bestMove)
     return
     
-def minimax(board,isMaximising):
+def minimax(board,depth,isMaximising):
     if checkWhichLetterWon(bot):
         return 100
     elif checkWhichLetterWon(player):
@@ -121,23 +121,23 @@ def minimax(board,isMaximising):
         return 0
     
     if isMaximising:
-        print("In Maximising")
+       
         bestScore= -1000
         for key in board.keys():
             if(board[key]==' '):
                 board[key]=bot
-                score= minimax(board,False)
+                score= minimax(board, depth + 1, False)
                 board[key]=' '
                 if(score> bestScore):
                     bestScore= score          
         return bestScore
     else:
-        print("In Minimising")
+        
         bestScore= 1000
         for key in board.keys():
             if(board[key]==' '):
                 board[key]=bot
-                score= minimax(board,True)
+                score= minimax(board, depth + 1 ,True)
                 board[key]=' '
                 if(score< bestScore):
                     bestScore= score
